@@ -5,23 +5,45 @@
                     width="40" height="32" role="img" aria-label="Bootstrap">
                     <use xlink:href="#bootstrap"></use>
                 </svg> </a>
-            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="/" class="nav-link px-2 text-white">首頁</a></li>
-                <li><a href="/json" class="nav-link px-2 text-white">JSON資料讀取複習</a></li>
-                <li><a href="/response_body" class="nav-link px-2 text-white">資料接收</a></li>
-                <li><a href="/request_data" class="nav-link px-2 text-white">資料傳遞</a></li>
-
-                <li><a href="/address" class="nav-link px-2 text-white">住址</a></li>
-                <li><a href="/members" class="nav-link px-2 text-white">會員管理</a></li>
-                <li><a href="/attraction" class="nav-link px-2 text-white">景點瀏覽</a></li>
-                <li><a href="/clock" class="nav-link px-2 text-white">SSE時鐘</a></li>
-                <li><a href="/ws-hello" class="nav-link px-2 text-white">Hello WebSocket</a></li>
-                <li><a href="/barchart" class="nav-link px-2 text-white">長條圖</a></li>
-                <li><a href="/map" class="nav-link px-2 text-white">地圖顯示</a></li>
-                <li><a href="/recognize" class="nav-link px-2 text-white">圖片辨識</a></li>
-                <li><a href="/recognize-stream" class="nav-link px-2 text-white">圖片辨識(串流)</a></li>
-                <li><a href="/recognize-ws" class="nav-link px-2 text-white">圖片辨識(WebSocket)</a></li>
-
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 navbar-hover-dropdown">
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle px-2 text-white" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">上課練習</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/">基本語法</a></li>
+                        <li><a class="dropdown-item" href="/json">JSON資料讀取複習</a></li>
+                        <li><a class="dropdown-item" href="/response_body">資料接收</a></li>
+                        <li><a class="dropdown-item" href="/request_data">資料傳遞</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle px-2 text-white" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">範例參考</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/address">住址連動</a></li>
+                        <li><a class="dropdown-item" href="/members">會員管理</a></li>
+                        <li><a class="dropdown-item" href="/attraction">景點瀏覽</a></li>
+                        <li><a class="dropdown-item" href="/barchart">長條圖</a></li>
+                        <li><a class="dropdown-item" href="/map">地圖顯示</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle px-2 text-white" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">額外補充</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/clock">SSE時鐘</a></li>
+                        <li><a class="dropdown-item" href="/ws-hello">Hello WebSocket</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle px-2 text-white" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">AI應用</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/recognize">圖片辨識</a></li>
+                        <li><a class="dropdown-item" href="/recognize-stream">圖片辨識(串流)</a></li>
+                        <li><a class="dropdown-item" href="/recognize-ws">圖片辨識(WebSocket)</a></li>
+                    </ul>
+                </li>
             </ul>
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search"> <input type="search"
                     class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
@@ -31,3 +53,14 @@
         </div>
     </div>
 </header>
+<style>
+    /* 第一層分類改成滑鼠移入即展開，不用點擊 */
+    .navbar-hover-dropdown .dropdown-menu {
+        display: none;
+        margin-top: 0;
+    }
+
+    .navbar-hover-dropdown .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+</style>
