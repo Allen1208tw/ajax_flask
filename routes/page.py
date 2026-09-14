@@ -38,10 +38,6 @@ def recognize():
 def recognize_stream():
     return render_template('recognize_stream.html')
 
-@page_bp.route('/recognize-local')
-def recognize_local():
-    return render_template('recognize_local.html')
-
 @page_bp.route('/clock')
 def clock():
     return render_template('clock.html')
