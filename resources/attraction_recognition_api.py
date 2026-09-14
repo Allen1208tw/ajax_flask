@@ -59,7 +59,7 @@ class AttractionImageRecognition(Resource):
                 mime_type=mime_type,
             )
             response = client.models.generate_content(
-                model="gemini-2.5-flash",
+                model="gemini-3.6-flash",
                 contents=[
                     image_part,
                     (
