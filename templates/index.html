@@ -21,16 +21,107 @@
         <div class="container mt-5">
             <!-- <div class="row justify-content-center"> -->
             <button id="buttonStart" class="btn btn-primary">Ajax 開始</button>
-            <button id="buttonStart" class="btn btn-primary">Ajax 結束</button>
+            <button id="buttonEnd" class="btn btn-primary">Ajax 結束</button>
             <img id="img1" src="static/images/Loading.gif" style="display: none;" alt="載入中..." />
 
 
             <div id="divInfo" class="alert mt-5"></div>
+            <ul>
+
+            </ul>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+
+        const apiUrl = 'http://127.0.0.1:5000/api/hello';
+        const img1 = document.querySelector('#img1');
+        //step 1
+        const btnstart = document.querySelector('#buttonStart');
+        const ul = document.querySelector('#divInfo');
+        const btnend = document.querySelector('#buttonEnd');
+        let abortController;
+
+        btnend.addEventListener('click', () => {
+            if (abortController) {
+                abortController.abort(); // 取消請求
+                ul.innerHTML = `<li>已取消請求</li>`;
+            }
+        });
+
+        //step2 按下按鈕=>click事件=>ajax開始
+        btnstart.addEventListener('click', async () => {
+            //step3呼叫api
+            // const response = await fetch(apiUrl);
+            // const data = await response.json(); //要從response body取出裡面的json資料
+            try {
+                //建立abortController 物件
+                abortController = new AbortController();
+                const signal = abortController.signal;
+                btnstart.disabled = true; // 禁用按鈕
+                img1.style.display = 'inline'; // 顯示載入圖示
+                const response = await fetch(apiUrl, { signal }); //原本應該要{signal : signal}但如果變數名稱一樣就可以省略
+                if (!response.ok) {
+                    throw new Error(`API呼叫錯誤，狀態碼：${response.status}`);
+
+                }
+                const data = await response.json(); //要從response body取出裡面的json資料
+                ul.innerHTML = `<li>${data.message}</li>`;
+
+            } catch (error) {
+                let message = error.message
+                if (error.name === abortError) {
+                    message = '請求已取消';
+                }
+
+                ul.innerHTML = `<li>錯誤訊息:${message}</li>`;
+                alert('發生錯誤，請稍後再試');
+            }
+            finally {
+                img1.style.display = 'none'; // 隱藏載入圖示
+                btnstart.disabled = false; // 啟用按鈕
+                console.log('API呼叫完成');
+            }
+
+
+
+            // if (response.ok) {
+            //     ul.innerHTML = `<li>${data.message}</li>`;
+            // } else {
+            //     if (response.status == 404) {
+            //         alert('找不到資源');
+            //     } else if (response.status == 500) {
+            //         alert('伺服器內部錯誤');
+            //     }
+            //     else {
+            //         alert('發生錯誤，請稍後再試');
+            //     }
+            // }
+            // console.log(data);
+            // console.log(data.message);
+            // ul.innerHTML = `<li>${data.message}</li>`;
+
+            // console.log(fetch(apiUrl));
+            // fetch(apiUrl)
+            //     .then((response) => {
+            //         console.log(response);
+            //         console.log(response.ok);
+            //         console.log(response.status);
+            //         console.log(response.headers.get('Content-Type'));
+            //         console.log(response.headers.get('Content-Length'));
+            //         return response.json(); //要從response取出裡面的json資料
+            //     })
+            //     .then((data) => {
+            //         console.log(data);
+            //         console.log(data.message);
+            //     })
+
+            // fetch(apiUrl)
+            //     .then(response => response.json())
+            //     .then(data => console.log(data.message));
+        });
+
 
         //想想看蛋、咖啡、吐司印出的順序與時間
 
